@@ -13,8 +13,8 @@ import lombok.ToString;
 @Data               // dodaje gettery settery
 @NoArgsConstructor  // dodaje konstruktor domyślny
 public class User {
-    public static int id;
-    private int user_id;
+    public static Long id;
+    private Long user_id;
     private String name;
     private String lastname;
     private Boolean status;

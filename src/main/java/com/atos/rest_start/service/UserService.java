@@ -17,7 +17,25 @@ public class UserService {
     private List<User> users = new ArrayList<>();
 
     public User addNewUser(String name, String lastname){
-        return new User(name, lastname);
+        User user = new User(name, lastname);
+        users.add(user);
+        return user;
     }
-
+    public List<User> getAllUsers(){
+        return users;
+    }
+    public User getUserById(Long id){
+        for (User user : users){
+            if(user.getUser_id() == id){
+                return user;
+            }
+        }
+        return null;
+    }
+    // optional może zawierać obiekt klasy user lub null
+    public Optional<User> getUserByIdStrem(Long id){
+        return users.stream()
+                .filter(user -> user.getUser_id() == id)
+                .findAny();
+    }
 }
