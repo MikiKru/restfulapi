@@ -29,8 +29,4 @@ public class HelloWorldController {
             return "masakra";
         }
     }
-    @PostMapping("/add/user")
-    public
-
-
 }
