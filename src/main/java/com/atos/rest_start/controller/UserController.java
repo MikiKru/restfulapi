@@ -1,6 +1,7 @@
 package com.atos.rest_start.controller;
 
 import com.atos.rest_start.model.User;
+import com.atos.rest_start.model.enums.RoleEnum;
 import com.atos.rest_start.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,14 @@ public class UserController {
     // mechanizm wstrzykiwania zależności
     @Autowired
     private UserService userService;
+
+    @PutMapping("/update/role/{user_id}")
+    public ResponseEntity updateUserRole(
+            @PathVariable Long user_id,
+            @RequestParam RoleEnum role){
+        userService.updateUserRole(user_id, role);
+        return ResponseEntity.ok(200);
+    }
 
     @PutMapping("/update/{user_id}")
     public User updateUserById(@PathVariable Long user_id){
@@ -42,7 +51,7 @@ public class UserController {
             // metoda get() wydobywa wartść z Optionala
             return user.get();
         }
-        return new User(null,null,null,null);
+        return new User(null,null,null,null, null);
         // wersja zz wyrażeniem lambda
         // return user.orElseGet(() -> new User(null, null));
     }

@@ -1,5 +1,6 @@
 package com.atos.rest_start.model;
 
+import com.atos.rest_start.model.enums.RoleEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,7 @@ public class User {
     private String name;
     private String lastname;
     private Boolean status;
+    private RoleEnum role;
 
     public User(String name, String lastname) {
         this.name = name;
@@ -27,5 +29,6 @@ public class User {
         this.status = false;
         id++;
         this.user_id = id;
+        this.role = RoleEnum.ROLE_USER;
     }
 }

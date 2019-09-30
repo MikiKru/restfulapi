@@ -1,6 +1,7 @@
 package com.atos.rest_start.service;
 
 import com.atos.rest_start.model.User;
+import com.atos.rest_start.model.enums.RoleEnum;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -15,9 +16,16 @@ public class UserService {
     -----------------------------------------------------------
     4. PUT -> zmień status na przeciwny i zwróć usera po user_id
     5. DELETE -> zwróć użytkownika po user_id i usuń go z listy
+    6. PUT -> zmień rolę użytkownika na rolę przekazaną w parametrze żądania
      */
 
     private List<User> users = new ArrayList<>();
+
+    public void updateUserRole(Long user_id, RoleEnum role){
+        if(getUserByIdStrem(user_id).isPresent()){
+            getUserByIdStrem(user_id).get().setRole(role);
+        }
+    }
 
     public User updateUserById(Long user_id){
         // wyszukaj usera po id
@@ -30,7 +38,7 @@ public class UserService {
 //            users.set(users.indexOf(updatedUser) , updatedUser);
             return updatedUser;
         }
-        return new User(null,null,null,null);
+        return new User(null,null,null,null, null);
     }
     public void removeUserById(Long user_id){
         if(getUserByIdStrem(user_id).isPresent()) {
