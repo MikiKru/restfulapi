@@ -12,9 +12,29 @@ public class UserService {
     1. POST -> dodaj usera do listy users
     2. GET -> pobierz zawartość listy getAll()
     3. GET -> wyszukaj i zwróć w JSON usera z listy po user_id
+    -----------------------------------------------------------
+    4. PUT -> zmień status na przeciwny i zwróć usera po user_id
+    5. DELETE -> zwróć użytkownika po user_id i usuń go z listy
      */
 
     private List<User> users = new ArrayList<>();
+
+    public User updateUserById(Long user_id){
+        // wyszukaj usera po id
+        Optional<User> updatedOptional = getUserByIdStrem(user_id);
+        if(updatedOptional.isPresent()){
+            User updatedUser = updatedOptional.get();
+            // zmodyfikuj status i zaktualizuj listę
+            updatedUser.setStatus(!updatedUser.getStatus());
+            // zaktualizowanie listy - opcjonalnie!!!
+            users.set(users.indexOf(updatedUser) , updatedUser);
+            return updatedUser;
+        }
+        return new User(null,null,null,null);
+    }
+    public void removeUserById(Long user_id){
+        users.remove(getUserByIdStrem(user_id).get());
+    }
 
     public User addNewUser(String name, String lastname){
         User user = new User(name, lastname);

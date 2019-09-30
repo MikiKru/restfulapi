@@ -4,6 +4,7 @@ import com.atos.rest_start.model.User;
 import com.atos.rest_start.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
@@ -14,6 +15,16 @@ public class UserController {
     // mechanizm wstrzykiwania zależności
     @Autowired
     private UserService userService;
+
+    @PutMapping("/update/{user_id}")
+    public User updateUserById(@PathVariable Long user_id){
+        return userService.updateUserById(user_id);
+    }
+    @DeleteMapping("/delete/{user_id}")
+    public ResponseEntity deleteUserbyId(Long user_id){
+        userService.removeUserById(user_id);
+        return ResponseEntity.ok(200);
+    }
 
     @PostMapping("/add")
     public User addNewUser(@RequestParam String name, @RequestParam String lastname){
