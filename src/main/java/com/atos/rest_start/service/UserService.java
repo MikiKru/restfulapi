@@ -26,14 +26,16 @@ public class UserService {
             User updatedUser = updatedOptional.get();
             // zmodyfikuj status i zaktualizuj listę
             updatedUser.setStatus(!updatedUser.getStatus());
-            // zaktualizowanie listy - opcjonalnie!!!
-            users.set(users.indexOf(updatedUser) , updatedUser);
+//            // zaktualizowanie listy - opcjonalnie!!!
+//            users.set(users.indexOf(updatedUser) , updatedUser);
             return updatedUser;
         }
         return new User(null,null,null,null);
     }
     public void removeUserById(Long user_id){
-        users.remove(getUserByIdStrem(user_id).get());
+        if(getUserByIdStrem(user_id).isPresent()) {
+            users.remove(getUserByIdStrem(user_id).get());
+        }
     }
 
     public User addNewUser(String name, String lastname){
