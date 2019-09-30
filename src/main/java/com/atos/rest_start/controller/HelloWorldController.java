@@ -19,16 +19,18 @@ public class HelloWorldController {
         return "Hello World!";
     }
     @GetMapping("/data/{myName}&{birthDate}")
-    public String helloWithName(@PathVariable String myName, @PathVariable String birthDate){
+    public String helloWithName(@PathVariable(name = "myName") String name, @PathVariable String birthDate){
         try {
             LocalDate date = LocalDate.parse(birthDate);
-            return "name: " + myName + ";" + "lastname: " + date;
+            return "name: " + name + ";" + "lastname: " + date;
         } catch (DateTimeParseException e){
-            return "name: " + myName;
+            return "name: " + name;
         } catch (Exception e){
             return "masakra";
         }
     }
+    @PostMapping("/add/user")
+    public
 
 
 }
