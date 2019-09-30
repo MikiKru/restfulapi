@@ -1,5 +1,6 @@
 package com.atos.rest_start.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -12,8 +13,9 @@ import lombok.ToString;
 // -> toString                      ALT + Ins
 @Data               // dodaje gettery settery
 @NoArgsConstructor  // dodaje konstruktor domyślny
+@AllArgsConstructor // dodaje konstruktor z wszystkimi argumentami
 public class User {
-    public static Long id;
+    public static Long id = Long.valueOf(0);
     private Long user_id;
     private String name;
     private String lastname;

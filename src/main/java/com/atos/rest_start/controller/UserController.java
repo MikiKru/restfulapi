@@ -31,7 +31,7 @@ public class UserController {
             // metoda get() wydobywa wartść z Optionala
             return user.get();
         }
-        return new User(null,null);
+        return new User(null,null,null,null);
         // wersja zz wyrażeniem lambda
         // return user.orElseGet(() -> new User(null, null));
     }

@@ -26,7 +26,7 @@ public class UserService {
     }
     public User getUserById(Long id){
         for (User user : users){
-            if(user.getUser_id() == id){
+            if(user.getUser_id().equals(id)){
                 return user;
             }
         }
@@ -35,7 +35,7 @@ public class UserService {
     // optional może zawierać obiekt klasy user lub null
     public Optional<User> getUserByIdStrem(Long id){
         return users.stream()
-                .filter(user -> user.getUser_id() == id)
+                .filter(user -> user.getUser_id().equals(id))
                 .findAny();
     }
 }
