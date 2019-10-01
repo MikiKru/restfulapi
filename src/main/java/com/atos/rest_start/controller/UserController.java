@@ -17,13 +17,30 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PutMapping("/update/role/{user_id}")
-    public ResponseEntity updateUserRole(
+    @PutMapping("add/role/{user_id}")
+    public String addRole(
             @PathVariable Long user_id,
-            @RequestParam RoleEnum role){
-        userService.updateUserRole(user_id, role);
-        return ResponseEntity.ok(200);
+            @RequestParam RoleEnum role
+    ){
+        userService.addRoleToUserRoles(user_id,role);
+        return "grant permission " + role;
     }
+    @PutMapping("sub/role/{user_id}")
+    public String subRole(
+            @PathVariable Long user_id,
+            @RequestParam RoleEnum role
+    ){
+        userService.subRoleFromUserRoles(user_id,role);
+        return "subtract permission " + role;
+    }
+
+//    @PutMapping("/update/role/{user_id}")
+//    public ResponseEntity updateUserRole(
+//            @PathVariable Long user_id,
+//            @RequestParam RoleEnum role){
+//        userService.updateUserRole(user_id, role);
+//        return ResponseEntity.ok(200);
+//    }
 
     @PutMapping("/update/{user_id}")
     public User updateUserById(@PathVariable Long user_id){
@@ -55,4 +72,5 @@ public class UserController {
         // wersja zz wyrażeniem lambda
         // return user.orElseGet(() -> new User(null, null));
     }
+
 }

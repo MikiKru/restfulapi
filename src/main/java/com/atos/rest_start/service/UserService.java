@@ -17,15 +17,37 @@ public class UserService {
     4. PUT -> zmień status na przeciwny i zwróć usera po user_id
     5. DELETE -> zwróć użytkownika po user_id i usuń go z listy
     6. PUT -> zmień rolę użytkownika na rolę przekazaną w parametrze żądania
+    -----------------------------------------------------------
+    7. Dodaj do klasy użytkownika sekwencję przechowującą role użytkownika (relacja many to many)
+    -> zaimplementuj end-piont za pomocą którego można dodawać lub usuwać uprawnienia dla użytkownika
      */
 
     private List<User> users = new ArrayList<>();
 
-    public void updateUserRole(Long user_id, RoleEnum role){
-        if(getUserByIdStrem(user_id).isPresent()){
-            getUserByIdStrem(user_id).get().setRole(role);
+    // dodaj rolę do zbioru ról
+    public void addRoleToUserRoles(Long user_id, RoleEnum role){
+        if(users.stream().filter(user -> user.getUser_id().equals(user_id)).findAny().isPresent()) {
+            users.stream()
+                    .filter(user -> user.getUser_id().equals(user_id)).findAny()
+                    .get()
+                    .addRole(role);
         }
     }
+    public void subRoleFromUserRoles(Long user_id, RoleEnum role){
+        if(users.stream().filter(user -> user.getUser_id().equals(user_id)).findAny().isPresent()) {
+            users.stream()
+                    .filter(user -> user.getUser_id().equals(user_id)).findAny()
+                    .get()
+                    .subRole(role);
+        }
+    }
+    // usuń rolę z zbioru ról
+
+//    public void updateUserRole(Long user_id, RoleEnum role){
+//        if(getUserByIdStrem(user_id).isPresent()){
+//            getUserByIdStrem(user_id).get().setRole(role);
+//        }
+//    }
 
     public User updateUserById(Long user_id){
         // wyszukaj usera po id

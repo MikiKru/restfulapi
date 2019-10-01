@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.HashSet;
+import java.util.Set;
+
 // klasa modelu - determinuje strukturę danych
 // implementuje wzorzec java beans
 // -> prywatne pola
@@ -21,7 +24,14 @@ public class User {
     private String name;
     private String lastname;
     private Boolean status;
-    private RoleEnum role;
+    private Set<RoleEnum> roles = new HashSet<>();
+
+    public void addRole(RoleEnum role){
+        this.roles.add(role);
+    }
+    public void subRole(RoleEnum role){
+        this.roles.remove(role);
+    }
 
     public User(String name, String lastname) {
         this.name = name;
@@ -29,6 +39,7 @@ public class User {
         this.status = false;
         id++;
         this.user_id = id;
-        this.role = RoleEnum.ROLE_USER;
+        // dodanie domyślnie roli user
+        this.roles.add(RoleEnum.ROLE_USER);
     }
 }
